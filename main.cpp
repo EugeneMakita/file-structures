@@ -1,30 +1,7 @@
 #include<iostream>
 #include<string>
 #include<ctime>
-
-class Student{
-    public:
-        std::string id, name, surname;
-        int credit_hours;
-
-        Student(){
-
-        }
-
-        Student(std::string id, std::string name, std::string surname, int credit_Hours){
-            this->id = id;
-            this->name = name;
-            this->surname = surname;
-            this->credit_hours = credit_Hours;
-        }
-
-        void operator=(Student student){
-            this->id = student.id;
-            this->name = student.name;
-            this->surname = student.surname;
-            this->credit_hours = student.credit_hours;
-        }
-};
+#include "student.h"
 
 int main(){
     Student student("034FC", "john", "mangudya", 23);
