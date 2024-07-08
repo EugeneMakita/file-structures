@@ -23,3 +23,13 @@ void Student::operator=(Student student){
 std::string Student::get_full_name(){
     return this->name + " " + this->surname;
 }
+
+std::istream& operator>>(std::istream &input, Student &student){
+    input >> student.id >> student.name >> student.surname >> student.credit_hours;
+    return input;
+}
+
+std::ostream& operator<<(std::ostream &output, Student student){
+    output << "ID: " << student.id << " ,name: " <<student.name << " ,surname: " <<student.surname << " ,credit hours: " << student.credit_hours << " " << std::endl;
+    return output;
+}
