@@ -1,25 +1,8 @@
 #include<iostream>
 #include<string>
 #include<ctime>
-#include "student.h"
+#include "courseRegistration.h"
 
-class CourseRegistration {
-    public:
-        std::string name;
-        Student student;
-        int credit_hours;
-        char grade;
-
-    CourseRegistration(){
-    }
-
-    CourseRegistration(std::string name, Student student, int hours, char grade){
-        this->name = name;
-        this->student = student;
-        this->credit_hours = hours;
-        this->grade = grade;
-    }
-};
 
 int main(){
     Student student("034FC", "john", "mangudya", 23);
