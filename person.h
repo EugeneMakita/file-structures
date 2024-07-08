@@ -15,6 +15,5 @@ class Person{
 
         Person();
         friend std::ostream& operator<< (std::ostream &output, Person person);
-        friend std::istream& operator>> (std::istream &input, Person &person);
 };
 #endif
