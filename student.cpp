@@ -19,3 +19,7 @@ void Student::operator=(Student student){
     this->surname = student.surname;
     this->credit_hours = student.credit_hours;
 };
+
+std::string Student::get_full_name(){
+    return this->name + " " + this->surname;
+}
