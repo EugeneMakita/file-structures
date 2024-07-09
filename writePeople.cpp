@@ -3,7 +3,6 @@
 #include<fstream>
 #include "person.h"
 
-
 std::istream& operator>> (std::istream &input, Person &person){
     input >> person.FirstName >> 
         person.LastName >> 
