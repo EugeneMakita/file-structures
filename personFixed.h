@@ -13,5 +13,6 @@ class Person{
         char State[15];
         char ZipCode[7];
         Person();
+        friend std::istream &operator>>(std::istream &input, Person &person);
 };
 #endif
