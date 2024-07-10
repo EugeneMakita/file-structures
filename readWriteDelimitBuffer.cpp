@@ -1,6 +1,5 @@
 #include<iostream>
 #include "personFixed.h"
-#include "DelimTextBuffer.h"
 
 int main(){
     Person person;
@@ -34,22 +33,12 @@ int main(){
 
     Person person2;
 
-    Buffer.Unpack(person2.FirstName);
+    person2.unpack(Buffer);
     std::cout << "person2: " << person2.FirstName << std::endl;
-
-    Buffer.Unpack(person2.LastName);
     std::cout << "person2: " << person2.LastName << std::endl;
-
-    Buffer.Unpack(person2.Address);
     std::cout << "person2: " << person2.Address << std::endl;
-
-    Buffer.Unpack(person2.City);
     std::cout << "person2: " << person2.City << std::endl;
-
-    Buffer.Unpack(person2.State);
     std::cout << "person2: " << person2.State << std::endl;
-
-    Buffer.Unpack(person2.ZipCode);
     std::cout << "person2: " << person2.ZipCode << std::endl;
     return 0;
 }

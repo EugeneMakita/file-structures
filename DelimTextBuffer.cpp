@@ -1,7 +1,7 @@
 #include<iostream>
 #include "DelimTextBuffer.h"
 
-DelimTextBuffer::DelimTextBuffer(char Delim='|', int MaxBytes=1024){
+DelimTextBuffer::DelimTextBuffer(char Delim, int MaxBytes){
     this->Delim = Delim;
     this->MaxBytes = MaxBytes;
     this->Buffer = new char[this->MaxBytes];

@@ -12,6 +12,20 @@ Person::Person(){
     ZipCode[0] = 0;
 }
 
+int Person::pack(DelimTextBuffer &buffer){
+    return 0;
+}
+
+int Person::unpack(DelimTextBuffer Buffer){
+    Buffer.Unpack(this->FirstName);
+    Buffer.Unpack(this->LastName);
+    Buffer.Unpack(this->Address);
+    Buffer.Unpack(this->City);
+    Buffer.Unpack(this->State);
+    Buffer.Unpack(this->ZipCode);
+    return 0;
+}
+
 std::istream &operator>>(std::istream &input, Person &person){
     const char DELIMITER = '|';
     std::cin.getline(person.FirstName,11, DELIMITER);

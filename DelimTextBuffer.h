@@ -1,5 +1,5 @@
 #ifndef DELIMTEXTBUFFER_H
-#define DELIMTEXBUFFER_H
+#define DELIMTEXTBUFFER_H
 #include<iostream>
 
 class DelimTextBuffer{
