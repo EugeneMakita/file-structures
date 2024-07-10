@@ -20,17 +20,24 @@ class DelimTextBuffer{
         void clear(){
             this->BufferSize = 0;
             this->NextByte = 0;
+            this->Buffer = new char[this->MaxBytes];
         }
 
         int Read(std::istream &input) {
             clear();
+            input.read((char*)&BufferSize, sizeof(int));
+            if (BufferSize> MaxBytes){
+                return false;
+            }
+            input.seekg(sizeof(BufferSize));
+            input.read(Buffer, BufferSize);
+            std::cout << Buffer << std::endl;
             return 0;
         }
 
         int Write(std::ostream &output) const{
             output.write((char*)&BufferSize, sizeof(BufferSize));
             output.write(Buffer, BufferSize);
-            std::cout <<"Buffer size on write: " <<BufferSize <<std::endl;
             return output.good();
         }
 
