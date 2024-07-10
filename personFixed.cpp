@@ -12,17 +12,25 @@ Person::Person(){
     ZipCode[0] = 0;
 }
 
-int Person::pack(DelimTextBuffer &buffer){
-    return 0;
+int Person::pack(DelimTextBuffer &Buffer){
+    int result;
+    result = Buffer.Pack(this->FirstName);
+    result = result && Buffer.Pack(this->LastName);
+    result = result && Buffer.Pack(this->Address);
+    result = result && Buffer.Pack(this->City);
+    result = result && Buffer.Pack(this->State);
+    result = result && Buffer.Pack(this->ZipCode);
+    return result;
 }
 
 int Person::unpack(DelimTextBuffer Buffer){
-    Buffer.Unpack(this->FirstName);
-    Buffer.Unpack(this->LastName);
-    Buffer.Unpack(this->Address);
-    Buffer.Unpack(this->City);
-    Buffer.Unpack(this->State);
-    Buffer.Unpack(this->ZipCode);
+    int result;
+    result = Buffer.Unpack(this->FirstName);
+    result = result && Buffer.Unpack(this->LastName);
+    result = result && Buffer.Unpack(this->Address);
+    result = result && Buffer.Unpack(this->City);
+    result = result && Buffer.Unpack(this->State);
+    result = result && Buffer.Unpack(this->ZipCode);
     return 0;
 }
 

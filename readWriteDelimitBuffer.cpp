@@ -17,14 +17,12 @@ int main(){
     std::ofstream output;
     output.open("name.bin", std::ios::binary);
 
-    Buffer.Pack(person.FirstName);
-    Buffer.Pack(person.LastName);
-    Buffer.Pack(person.Address);
-    Buffer.Pack(person.City);
-    Buffer.Pack(person.State);
-    Buffer.Pack(person.ZipCode);
-    Buffer.Write(output);
-    output.close();
+    if (person.pack(Buffer)){
+        Buffer.Write(output);
+        output.close();
+    }else{
+        std::cout << "failed to pack the person" << std::endl;
+    }
 
 	std::ifstream input;
 	input.open("name.bin");
