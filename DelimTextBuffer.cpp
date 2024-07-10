@@ -17,22 +17,25 @@ class DelimTextBuffer{
             this->NextByte = 0;
         };
 
-        void clear(){
+        void Clear(){
             this->BufferSize = 0;
             this->NextByte = 0;
             this->Buffer = new char[this->MaxBytes];
         }
 
+        void PrintBuffer(){
+            std::cout << "Contents of buffer:" << Buffer << std::endl;
+        }
+
         int Read(std::istream &input) {
-            clear();
+            Clear();
             input.read((char*)&BufferSize, sizeof(int));
             if (BufferSize> MaxBytes){
                 return false;
             }
             input.seekg(sizeof(BufferSize));
             input.read(Buffer, BufferSize);
-            std::cout << Buffer << std::endl;
-            return 0;
+            return input.good();
         }
 
         int Write(std::ostream &output) const{
@@ -59,7 +62,19 @@ class DelimTextBuffer{
         }
 
         int Unpack(char *str){
-            return 0;
+            int len = -1;
+            int start = NextByte;
+            for (int i = NextByte; i < BufferSize ; i++){
+                if (Buffer[i] == Delim){
+                    len = i- NextByte;
+                    break;
+                }
+            }
+            NextByte += len + 1;
+            if (NextByte > BufferSize) { return false;}
+            strncpy(str, &Buffer[start], len);
+            str[len] = 0;
+            return true;
         }
 };
 
@@ -88,10 +103,29 @@ int main(){
     Buffer.Write(output);
     output.close();
 
-	 std::ifstream input;
+	std::ifstream input;
 	input.open("name.bin");
-	 Buffer.Read(input);
+	Buffer.Read(input);
 	input.close();
 
+    Person person2;
+
+    Buffer.Unpack(person2.FirstName);
+    std::cout << "person2: " << person2.FirstName << std::endl;
+
+    Buffer.Unpack(person2.LastName);
+    std::cout << "person2: " << person2.LastName << std::endl;
+
+    Buffer.Unpack(person2.Address);
+    std::cout << "person2: " << person2.Address << std::endl;
+
+    Buffer.Unpack(person2.City);
+    std::cout << "person2: " << person2.City << std::endl;
+
+    Buffer.Unpack(person2.State);
+    std::cout << "person2: " << person2.State << std::endl;
+
+    Buffer.Unpack(person2.ZipCode);
+    std::cout << "person2: " << person2.ZipCode << std::endl;
     return 0;
 }
