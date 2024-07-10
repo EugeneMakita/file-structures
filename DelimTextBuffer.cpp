@@ -13,16 +13,24 @@ class DelimTextBuffer{
             this->Delim = Delim;
             this->MaxBytes = MaxBytes;
             this->Buffer = new char[this->MaxBytes];
+            this->BufferSize = 0;
+            this->NextByte = 0;
         };
 
-        int Read(std::istream &input){
-            input.read((char*)&BufferSize, sizeof(BufferSize));
+        void clear(){
+            this->BufferSize = 0;
+            this->NextByte = 0;
+        }
+
+        int Read(std::istream &input) {
+            clear();
             return 0;
         }
 
         int Write(std::ostream &output) const{
             output.write((char*)&BufferSize, sizeof(BufferSize));
             output.write(Buffer, BufferSize);
+            std::cout <<"Buffer size on write: " <<BufferSize <<std::endl;
             return output.good();
         }
 
@@ -61,8 +69,8 @@ int main(){
     std::cout << person.State << std::endl;
     std::cout << person.ZipCode << std::endl;
 
-    std::ofstream file;
-    file.open("name.bin", std::ios::binary);
+    std::ofstream output;
+    output.open("name.bin", std::ios::binary);
 
     Buffer.Pack(person.FirstName);
     Buffer.Pack(person.LastName);
@@ -70,7 +78,13 @@ int main(){
     Buffer.Pack(person.City);
     Buffer.Pack(person.State);
     Buffer.Pack(person.ZipCode);
-    Buffer.Write(file);
+    Buffer.Write(output);
+    output.close();
+
+	 std::ifstream input;
+	input.open("name.bin");
+	 Buffer.Read(input);
+	input.close();
 
     return 0;
 }
