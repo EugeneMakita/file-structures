@@ -31,7 +31,7 @@ int Person::unpack(DelimTextBuffer Buffer){
     result = result && Buffer.Unpack(this->City);
     result = result && Buffer.Unpack(this->State);
     result = result && Buffer.Unpack(this->ZipCode);
-    return 0;
+    return result;
 }
 
 std::istream &operator>>(std::istream &input, Person &person){
@@ -43,5 +43,15 @@ std::istream &operator>>(std::istream &input, Person &person){
     std::cin.getline(person.City,15, DELIMITER);
     std::cin.getline(person.State,15, DELIMITER);
     std::cin.getline(person.ZipCode,7, DELIMITER);
+    return input;
+}
+
+std::ostream &operator<<(std::ostream &input, Person person){
+    std::cout << "FirstName: " << person.FirstName << 
+        ", LastName: " << person.LastName << 
+        ", Address: " << person.Address << 
+        ", City: " << person.City <<
+        ", State: " << person.State <<
+        ", ZipCode: " <<person.ZipCode << std::endl;
     return input;
 }

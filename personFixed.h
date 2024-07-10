@@ -15,6 +15,7 @@ class Person{
         char ZipCode[7];
         Person();
         friend std::istream &operator>>(std::istream &input, Person &person);
+        friend std::ostream &operator<<(std::ostream &input, Person person);
         int pack(DelimTextBuffer &buffer);
         int unpack(DelimTextBuffer buffer);
 };
