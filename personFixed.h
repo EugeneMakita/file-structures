@@ -5,6 +5,7 @@
 #include<fstream>
 #include "DelimTextBuffer.h"
 #include "lengthTextBuffer.h"
+#include "FixedTextBuffer.h"
 
 class Person{
     public:
@@ -19,7 +20,10 @@ class Person{
         friend std::ostream &operator<<(std::ostream &input, Person person);
         int pack(DelimTextBuffer &buffer);
         int pack(LengthTextBuffer &buffer);
+        int pack(FixedTextBuffer &buffer);
         int unpack(DelimTextBuffer buffer);
         int unpack(LengthTextBuffer buffer);
+        int unpack(FixedTextBuffer buffer);
+        void initFixedTextBuffer(FixedTextBuffer buffer);
 };
 #endif

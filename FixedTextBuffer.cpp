@@ -3,10 +3,10 @@
 #include "personFixed.h"
 #include "FixedTextBuffer.h"
 
-FixedTextBuffer:: FixedTextBuffer(int MaxBytes, int MaxFields){
+FixedTextBuffer:: FixedTextBuffer(int MaxBytes, int MaxField){
     this->MaxBytes = MaxBytes;
     this->Buffer = new char[this->MaxBytes];
-    this->MaxFields = MaxFields;
+    this->MaxFields = MaxField;
     this->FieldSizes = new int[MaxFields];
     this->BufferSize = 0;
     this->NextBytes = 0;
@@ -42,13 +42,17 @@ void FixedTextBuffer::Clear(){
 }
 
 int FixedTextBuffer::Unpack(char *str){
+    if (Packing){
+        return false;
+    }
+
     int start = NextCharecter;
     int packSize = FieldSizes[NextField];
     strncpy(str, &Buffer[start], packSize);
     NextCharecter += packSize;
     str[packSize] = 0;
     NextField ++;
-    return 0;
+    return true;
 }
 
 int FixedTextBuffer::Pack(char *str){
@@ -70,7 +74,7 @@ int FixedTextBuffer::Pack(char *str){
 
     Buffer[NextCharecter] = 0;
 
-    if (NextField == NumberOfFields){
+    if (NextField >= NumberOfFields){
         Packing = false;
         NextField = NextCharecter = 0;
     }
@@ -87,42 +91,4 @@ int FixedTextBuffer::Read(std::istream &input){
 int FixedTextBuffer::Write(std::ostream &output){
     output.write(Buffer, BufferSize);
     return output.good();
-}
-
-int main(){
-    std::ofstream output;
-    output.open("FixedTextBuffer.bin", std::ios::binary);
-    Person person;
-    std::cin >> person;
-    std::cout << person;
-    FixedTextBuffer Buffer;
-    Buffer.AddField(10);
-    Buffer.AddField(10);
-    Buffer.AddField(10);
-    Buffer.AddField(10);
-    Buffer.AddField(10);
-    Buffer.AddField(10);
-    Buffer.Pack(person.FirstName);
-    Buffer.Pack(person.LastName);
-    Buffer.Pack(person.Address);
-    Buffer.Pack(person.City);
-    Buffer.Pack(person.State);
-    Buffer.Pack(person.ZipCode);
-    Buffer.Write(output);
-    output.close();
-
-    std::ifstream input;
-    input.open("FixedTextBuffer.bin", std::ios::binary);
-    Buffer.Read(input);
-    Person p;
-    Buffer.Unpack(p.FirstName);
-    Buffer.Unpack(p.LastName);
-    Buffer.Unpack(p.Address);
-    Buffer.Unpack(p.City);
-    Buffer.Unpack(p.State);
-    Buffer.Unpack(p.ZipCode);
-    input.close();
-    std::cout << p;
-    
-    return 0;
 }

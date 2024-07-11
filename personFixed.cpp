@@ -12,6 +12,15 @@ Person::Person(){
     ZipCode[0] = 0;
 }
 
+void Person::initFixedTextBuffer(FixedTextBuffer Buffer){
+    Buffer.AddField(10);
+    Buffer.AddField(10);
+    Buffer.AddField(10);
+    Buffer.AddField(10);
+    Buffer.AddField(10);
+    Buffer.AddField(10);
+}
+
 int Person::pack(DelimTextBuffer &Buffer){
     int result;
     result = Buffer.Pack(this->FirstName);
@@ -31,6 +40,28 @@ int Person::unpack(DelimTextBuffer Buffer){
     result = result && Buffer.Unpack(this->City);
     result = result && Buffer.Unpack(this->State);
     result = result && Buffer.Unpack(this->ZipCode);
+    return result;
+}
+
+int Person::unpack(FixedTextBuffer Buffer){
+    int result;
+    result = Buffer.Unpack(this->FirstName);
+    result = result && Buffer.Unpack(this->LastName);
+    result = result && Buffer.Unpack(this->Address);
+    result = result && Buffer.Unpack(this->City);
+    result = result && Buffer.Unpack(this->State);
+    result = result && Buffer.Unpack(this->ZipCode);
+    return result;
+}
+
+int Person::pack(FixedTextBuffer &Buffer){
+    int result;
+    result = Buffer.Pack(this->FirstName);
+    result = result && Buffer.Pack(this->LastName);
+    result = result && Buffer.Pack(this->Address);
+    result = result && Buffer.Pack(this->City);
+    result = result && Buffer.Pack(this->State);
+    result = result && Buffer.Pack(this->ZipCode);
     return result;
 }
 
