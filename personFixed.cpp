@@ -34,6 +34,28 @@ int Person::unpack(DelimTextBuffer Buffer){
     return result;
 }
 
+int Person::pack(LengthTextBuffer &Buffer){
+    int result;
+    result = Buffer.Pack(this->FirstName);
+    result = result && Buffer.Pack(this->LastName);
+    result = result && Buffer.Pack(this->Address);
+    result = result && Buffer.Pack(this->City);
+    result = result && Buffer.Pack(this->State);
+    result = result && Buffer.Pack(this->ZipCode);
+    return result;
+}
+
+int Person::unpack(LengthTextBuffer Buffer){
+    int result;
+    result = Buffer.Unpack(this->FirstName);
+    result = result && Buffer.Unpack(this->LastName);
+    result = result && Buffer.Unpack(this->Address);
+    result = result && Buffer.Unpack(this->City);
+    result = result && Buffer.Unpack(this->State);
+    result = result && Buffer.Unpack(this->ZipCode);
+    return result;
+}
+
 std::istream &operator>>(std::istream &input, Person &person){
     const char DELIMITER = '|';
     std::cin.getline(person.FirstName,11, DELIMITER);

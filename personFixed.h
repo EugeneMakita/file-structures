@@ -4,6 +4,7 @@
 #include<string>
 #include<fstream>
 #include "DelimTextBuffer.h"
+#include "lengthTextBuffer.h"
 
 class Person{
     public:
@@ -17,6 +18,8 @@ class Person{
         friend std::istream &operator>>(std::istream &input, Person &person);
         friend std::ostream &operator<<(std::ostream &input, Person person);
         int pack(DelimTextBuffer &buffer);
+        int pack(LengthTextBuffer &buffer);
         int unpack(DelimTextBuffer buffer);
+        int unpack(LengthTextBuffer buffer);
 };
 #endif
