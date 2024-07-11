@@ -20,7 +20,6 @@ int main(){
         std::cout << "Failed to pack the object" << std::endl;
     }
 
-
     std::ifstream input;
     input.open("lengthTextBuffer.bin", std::ios::binary);
     Buffer.Read(input);

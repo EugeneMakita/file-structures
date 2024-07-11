@@ -8,7 +8,6 @@ class LengthTextBuffer{
     int MaxBytes;
     int BufferSize;
     int NextBytes;
-    int *FieldSizes;
 
     public:
         LengthTextBuffer(int MaxBytes=1024);
