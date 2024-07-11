@@ -47,13 +47,20 @@ class FixedTextBuffer{
             return NumberOfFields;
         }
 
-        void Clean(){
+        void Clear(){
             this->Buffer = new char[this->MaxBytes];
-            this->BufferSize = 0;
+            //this->BufferSize = 0;
             this->NextBytes = 0;
+            this->NextField = 0;
         }
 
         int Unpack(char *str){
+            int start = NextCharecter;
+            int packSize = FieldSizes[NextField];
+            strncpy(str, &Buffer[start], packSize);
+            NextCharecter += packSize;
+            str[packSize] = 0;
+            NextField ++;
             return 0;
         }
 
@@ -85,12 +92,12 @@ class FixedTextBuffer{
         }
 
         int Read(std::istream &input){
+            Clear();
             input.read(Buffer, BufferSize);
             return input.good();
         }
 
         int Write(std::ostream &output){
-            std::cout << BufferSize << std::endl;
             output.write(Buffer, BufferSize);
             return output.good();
         }
@@ -101,7 +108,7 @@ int main(){
     output.open("FixedTextBuffer.bin", std::ios::binary);
     Person person;
     std::cin >> person;
-    std::cout << person << std::endl;
+    std::cout << person;
     FixedTextBuffer Buffer;
     Buffer.AddField(10);
     Buffer.AddField(10);
@@ -116,6 +123,20 @@ int main(){
     Buffer.Pack(person.State);
     Buffer.Pack(person.ZipCode);
     Buffer.Write(output);
+    output.close();
 
+    std::ifstream input;
+    input.open("FixedTextBuffer.bin", std::ios::binary);
+    Buffer.Read(input);
+    Person p;
+    Buffer.Unpack(p.FirstName);
+    Buffer.Unpack(p.LastName);
+    Buffer.Unpack(p.Address);
+    Buffer.Unpack(p.City);
+    Buffer.Unpack(p.State);
+    Buffer.Unpack(p.ZipCode);
+    input.close();
+    std::cout << p;
+    
     return 0;
 }
