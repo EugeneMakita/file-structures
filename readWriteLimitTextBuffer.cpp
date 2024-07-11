@@ -18,7 +18,29 @@ class Person{
             State[0] = 0;
             ZipCode[0] = 0;
         }
-};
+
+        int pack(LengthTextBuffer &Buffer){
+            int result;
+            result = Buffer.Pack(this->FirstName);
+            result = result && Buffer.Pack(this->LastName);
+            result = result && Buffer.Pack(this->Address);
+            result = result && Buffer.Pack(this->City);
+            result = result && Buffer.Pack(this->State);
+            result = result && Buffer.Pack(this->ZipCode);
+            return result;
+        }
+
+        int unpack(LengthTextBuffer Buffer){
+            int result;
+            result = Buffer.Unpack(this->FirstName);
+            result = result && Buffer.Unpack(this->LastName);
+            result = result && Buffer.Unpack(this->Address);
+            result = result && Buffer.Unpack(this->City);
+            result = result && Buffer.Unpack(this->State);
+            result = result && Buffer.Unpack(this->ZipCode);
+            return result;
+        }
+    };
 
 std::istream &operator>>(std::istream &input, Person &person){
     const char DELIMITER = '|';
@@ -52,27 +74,26 @@ int main(){
 
     std::ofstream output;
     output.open("lengthTextBuffer.bin", std::ios::binary);
-    Buffer.Pack(person.FirstName);
-    Buffer.Pack(person.LastName);
-    Buffer.Pack(person.Address);
-    Buffer.Pack(person.City);
-    Buffer.Pack(person.State);
-    Buffer.Pack(person.ZipCode);
-    Buffer.Write(output);
-    output.close();
+
+    if(person.pack(Buffer)){
+        Buffer.Write(output);
+        output.close();
+    }else{
+        std::cout << "Failed to pack the object" << std::endl;
+    }
+
 
     std::ifstream input;
     input.open("lengthTextBuffer.bin", std::ios::binary);
     Buffer.Read(input);
+
     Person person2;
-    Buffer.Unpack(person2.FirstName);
-    Buffer.Unpack(person2.LastName);
-    Buffer.Unpack(person2.Address);
-    Buffer.Unpack(person2.City);
-    Buffer.Unpack(person2.State);
-    Buffer.Unpack(person2.ZipCode);
-    std::cout << person2 << std::endl;
-    input.close();
+    if(person2.unpack(Buffer)){
+        std::cout << person2 << std::endl;
+        input.close();
+    }else{
+        std::cout << "Failed to unpack" << std::endl;
+    };
 
     return 0;
 }

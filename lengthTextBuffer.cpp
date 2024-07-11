@@ -2,7 +2,6 @@
 #include<fstream>
 #include "lengthTextBuffer.h"
 
-
 LengthTextBuffer::LengthTextBuffer(int MaxBytes){
     this->MaxBytes = MaxBytes;
     Buffer = new char[this->MaxBytes];
