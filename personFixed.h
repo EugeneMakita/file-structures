@@ -15,6 +15,7 @@ class Person{
         char City[15];
         char State[15];
         char ZipCode[7];
+
         Person();
         friend std::istream &operator>>(std::istream &input, Person &person);
         friend std::ostream &operator<<(std::ostream &input, Person person);
@@ -24,6 +25,6 @@ class Person{
         int unpack(DelimTextBuffer buffer);
         int unpack(LengthTextBuffer buffer);
         int unpack(FixedTextBuffer buffer);
-        void initFixedTextBuffer(FixedTextBuffer buffer);
+        void initFixedTextBuffer(FixedTextBuffer &buffer);
 };
 #endif

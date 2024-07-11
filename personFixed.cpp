@@ -12,7 +12,7 @@ Person::Person(){
     ZipCode[0] = 0;
 }
 
-void Person::initFixedTextBuffer(FixedTextBuffer Buffer){
+void Person::initFixedTextBuffer(FixedTextBuffer &Buffer){
     Buffer.AddField(10);
     Buffer.AddField(10);
     Buffer.AddField(10);
@@ -99,12 +99,12 @@ std::istream &operator>>(std::istream &input, Person &person){
     return input;
 }
 
-std::ostream &operator<<(std::ostream &input, Person person){
-    std::cout << "FirstName: " << person.FirstName << 
+std::ostream &operator<<(std::ostream &output, Person person){
+    output << "FirstName: " << person.FirstName << 
         ", LastName: " << person.LastName << 
-        ", Address: " << person.Address << 
+       ", Address: " << person.Address << 
         ", City: " << person.City <<
         ", State: " << person.State <<
         ", ZipCode: " <<person.ZipCode << std::endl;
-    return input;
+    return output;
 }
