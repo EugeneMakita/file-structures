@@ -1,24 +1,22 @@
 #ifndef DELIMTEXTBUFFER_H
 #define DELIMTEXTBUFFER_H
 #include<iostream>
+#include "IOBuffer.h"
 
-class DelimTextBuffer{
+class DelimTextBuffer: public IOBuffer{
     char Delim;
-    char *Buffer;
-    int MaxBytes;
-    int BufferSize;
     int NextByte;
 
     public:
         DelimTextBuffer(char Delim='|', int MaxBytes=1024);
-        void Clear();
+        void Clear() override;
         void PrintBuffer();
-        int Read(std::istream &input);
+        int Read(std::istream &input) override;
 
-        int Write(std::ostream &output) const;
+        int Write(std::ostream &output) const override;
 
-        int Pack(const char *str);
+        int Pack(const char *str) override;
 
-        int Unpack(char *str);
+        int Unpack(char *str) override;
 };
 #endif
