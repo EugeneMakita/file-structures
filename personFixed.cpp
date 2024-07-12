@@ -21,6 +21,10 @@ void Person::initFixedTextBuffer(FixedTextBuffer &Buffer){
     Buffer.AddField(10);
 }
 
+void Person::printBuffer(FixedTextBuffer &Buffer){
+    Buffer.PrintBuffer();
+}
+
 int Person::pack(DelimTextBuffer &Buffer){
     int result;
     result = Buffer.Pack(this->FirstName);
@@ -97,14 +101,4 @@ std::istream &operator>>(std::istream &input, Person &person){
     std::cin.getline(person.State,15, DELIMITER);
     std::cin.getline(person.ZipCode,7, DELIMITER);
     return input;
-}
-
-std::ostream &operator<<(std::ostream &output, Person person){
-    output << "FirstName: " << person.FirstName << 
-        ", LastName: " << person.LastName << 
-       ", Address: " << person.Address << 
-        ", City: " << person.City <<
-        ", State: " << person.State <<
-        ", ZipCode: " <<person.ZipCode << std::endl;
-    return output;
 }

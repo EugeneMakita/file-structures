@@ -2,6 +2,18 @@
 #include "personFixed.h"
 #include<string>
 
+std::ostream &operator<<(std::ostream &output, Person person){
+    std::cout << strlen(person.ZipCode) << std::endl;
+    std::cout << "ZipCode: " << person.ZipCode << std::endl;
+    /*output << "FirstName: " << person.FirstName << 
+        ", LastName: " << person.LastName << 
+       ", Address: " << person.Address << 
+        ", City: " << person.City <<
+        ", State: " << person.State <<
+        ", ZipCode: " <<person.ZipCode << std::endl;*/
+    return output;
+}
+
 int main(){
     std::ofstream output;
     std::string filename = "FixedTextBuffer.bin";
@@ -23,7 +35,8 @@ int main(){
     Person p;
     if(p.unpack(Buffer)){
         input.close();
-        std::cout << p;
     }
+
+    std::cout << p.ZipCode;
     return 0;
 }

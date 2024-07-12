@@ -19,6 +19,7 @@ class FixedTextBuffer{
         int AddField(int FieldSize);
         int GetNumberOfFields() const;
         void Clear();
+        void PrintBuffer();
         int Unpack(char *str);
         int Pack(char *str);
         int Read(std::istream &input);
