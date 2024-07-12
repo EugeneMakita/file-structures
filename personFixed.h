@@ -3,9 +3,8 @@
 #include<iostream>
 #include<string>
 #include<fstream>
-#include "DelimTextBuffer.h"
-#include "lengthTextBuffer.h"
 #include "FixedTextBuffer.h"
+#include "IOBuffer.h"
 
 class Person{
     public:
@@ -19,12 +18,8 @@ class Person{
         Person();
         friend std::istream &operator>>(std::istream &input, Person &person);
         friend std::ostream &operator<<(std::ostream &input, Person &person);
-        int pack(DelimTextBuffer &buffer);
-        int pack(LengthTextBuffer &buffer);
-        int pack(FixedTextBuffer &buffer);
-        int unpack(DelimTextBuffer buffer);
-        int unpack(LengthTextBuffer buffer);
-        int unpack(FixedTextBuffer buffer);
+        int pack(IOBuffer &buffer);
+        int unpack(IOBuffer &buffer);
         void initFixedTextBuffer(FixedTextBuffer &buffer);
 };
 #endif
