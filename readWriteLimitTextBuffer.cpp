@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include "personFixed.h"
+#include "lengthTextBuffer.h"
 
 int main(){
     Person person;

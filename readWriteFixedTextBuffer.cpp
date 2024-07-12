@@ -7,6 +7,7 @@ int main(){
     std::string filename = "FixedTextBuffer.bin";
     output.open(filename, std::ios::binary);
     Person person;
+    std::cout << "Enter Name,surname,address,city,state,zipCode:" <<std::endl;
     std::cin >> person;
     std::cout << person;
 
