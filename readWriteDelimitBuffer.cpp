@@ -1,5 +1,6 @@
 #include<iostream>
 #include "personFixed.h"
+#include "DelimTextBuffer.h"
 
 int main(){
     Person person;
