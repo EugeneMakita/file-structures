@@ -18,8 +18,7 @@ class Person{
 
         Person();
         friend std::istream &operator>>(std::istream &input, Person &person);
-        //friend std::ostream &operator<<(std::ostream &input, Person person);
-        void printBuffer(FixedTextBuffer &Buffer);
+        friend std::ostream &operator<<(std::ostream &input, Person &person);
         int pack(DelimTextBuffer &buffer);
         int pack(LengthTextBuffer &buffer);
         int pack(FixedTextBuffer &buffer);

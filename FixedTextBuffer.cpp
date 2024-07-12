@@ -16,10 +16,6 @@ FixedTextBuffer:: FixedTextBuffer(int MaxBytes, int MaxField){
     this->Packing = true;
 }
 
-void FixedTextBuffer::PrintBuffer(){
-    std::cout << this->Buffer << std::endl;
-}
-
 int FixedTextBuffer::AddField(int FieldSize){
     if (NumberOfFields >= MaxFields){
         return false;
