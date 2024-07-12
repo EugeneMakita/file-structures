@@ -44,13 +44,13 @@ int LengthTextBuffer::Unpack(char *str){
     return true;
 }
 
-int LengthTextBuffer::Write(std::ofstream &output){
+int LengthTextBuffer::Write(std::ostream &output) const{
     output.write((char *)&BufferSize, sizeof(BufferSize));
     output.write(Buffer, BufferSize);
     return output.good();
 }
 
-int LengthTextBuffer::Read(std::ifstream &input){
+int LengthTextBuffer::Read(std::istream &input){
     Clear();
     input.read((char*)&BufferSize, sizeof(int));
     if (BufferSize> MaxBytes){
