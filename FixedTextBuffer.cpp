@@ -55,7 +55,7 @@ int FixedTextBuffer::Unpack(char *str){
     return true;
 }
 
-int FixedTextBuffer::Pack(char *str){
+int FixedTextBuffer::Pack(const char *str){
     if (!Packing){
         return false;
     }
@@ -88,7 +88,7 @@ int FixedTextBuffer::Read(std::istream &input){
     return input.good();
 }
 
-int FixedTextBuffer::Write(std::ostream &output){
+int FixedTextBuffer::Write(std::ostream &output) const{
     output.write(Buffer, BufferSize);
     return output.good();
 }
