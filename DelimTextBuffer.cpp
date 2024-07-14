@@ -19,10 +19,14 @@ void  DelimTextBuffer::PrintBuffer(){
     std::cout << "Contents of buffer:" << Buffer << std::endl;
 }
 
+int DelimTextBuffer::GetBufferSize(){
+    return BufferSize;
+}
+
 int  DelimTextBuffer::Read(std::istream &input) {
     Clear();
     input.read((char*)&BufferSize, sizeof(int));
-    if (BufferSize> MaxBytes){
+    if (BufferSize > MaxBytes){
         return false;
     }
     input.seekg(sizeof(BufferSize));

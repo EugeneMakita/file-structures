@@ -22,3 +22,11 @@ int IOBuffer::Read(std::istream &input){
 int IOBuffer::Write(std::ostream &output) const{
     return 0;
 }
+
+int IOBuffer::WriteHeader(){
+    return 0;
+}
+
+int IOBuffer::ReadHeader(){
+    return 0;
+}

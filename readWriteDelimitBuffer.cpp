@@ -10,7 +10,7 @@ int main(){
 
     std::cout << person;
     std::ofstream output;
-    output.open("name.bin", std::ios::binary);
+    output.open("DelimitBuffer.bin", std::ios::binary);
 
     if (person.pack(Buffer)){
         Buffer.Write(output);
@@ -20,7 +20,7 @@ int main(){
     }
 
 	std::ifstream input;
-	input.open("name.bin");
+	input.open("DelimitBuffer.bin");
 	Buffer.Read(input);
 
     Person person2;

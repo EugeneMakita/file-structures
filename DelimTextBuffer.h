@@ -11,6 +11,7 @@ class DelimTextBuffer: public IOBuffer{
         DelimTextBuffer(char Delim='|', int MaxBytes=1024);
         void Clear() override;
         void PrintBuffer();
+        int GetBufferSize();
         int Read(std::istream &input) override;
 
         int Write(std::ostream &output) const override;

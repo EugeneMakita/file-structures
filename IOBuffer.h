@@ -12,6 +12,8 @@ class IOBuffer{
         IOBuffer(int maxBytes=1024);
         virtual void Clear();
         virtual int Unpack(char *str);
+        virtual int WriteHeader();
+        virtual int ReadHeader();
         virtual int Pack(const char *str);
         virtual int Read(std::istream &input);
         virtual int Write(std::ostream &output) const;
