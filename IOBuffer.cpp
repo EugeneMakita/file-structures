@@ -23,7 +23,11 @@ int IOBuffer::Write(std::ostream &output) const{
     return 0;
 }
 
-int IOBuffer::WriteHeader(){
+int IOBuffer::WriteHeader(std::ostream &output){
+    return 0;
+}
+
+int IOBuffer::ReadHeader(std::istream &input){
     return 0;
 }
 

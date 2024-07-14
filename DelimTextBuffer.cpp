@@ -29,7 +29,8 @@ int  DelimTextBuffer::Read(std::istream &input) {
     if (BufferSize > MaxBytes){
         return false;
     }
-    input.seekg(sizeof(BufferSize));
+
+
     input.read(Buffer, BufferSize);
     return input.good();
 }
@@ -71,4 +72,16 @@ int  DelimTextBuffer::Unpack(char *str){
     strncpy(str, &Buffer[start], len);
     str[len] = 0;
     return true;
+}
+
+int DelimTextBuffer::WriteHeader(std::ostream &output){
+    output.seekp(0, std::ios::beg);
+    output.write(&Delim, sizeof(char));
+    return sizeof(Delim);
+}
+
+int DelimTextBuffer::ReadHeader(std::istream &input){
+    input.seekg(0, std::ios::beg);
+    input.read(&Delim, sizeof(char));
+    return sizeof(Delim);
 }

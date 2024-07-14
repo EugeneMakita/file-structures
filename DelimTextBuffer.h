@@ -19,5 +19,7 @@ class DelimTextBuffer: public IOBuffer{
         int Pack(const char *str) override;
 
         int Unpack(char *str) override;
+        int WriteHeader(std::ostream &input) override;
+        int ReadHeader(std::istream &input) override;
 };
 #endif

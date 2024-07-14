@@ -15,18 +15,15 @@ class BufferFile{
         BufferFile(DelimTextBuffer &buffer):Buffer(buffer){
         }
 
-        int printObject(){
-            std::cout <<"Semaruva: " << &Buffer << std::endl;
-            return 0;
-        }
-
         int Open(std::string filename, int mode){
             File.open(filename, std::ios::binary | std::ios::in |std::ios::out);
             if(!File.good()){ 
                 return false;
             }
-            File.seekg(0, std::ios::beg);
+
+            //HeaderSize = Buffer.ReadHeader(File);
             File.seekp(0, std::ios::beg);
+            File.seekg(0, std::ios::beg);
             return true;
         }
 
@@ -35,6 +32,8 @@ class BufferFile{
             if(!File.good()){
                 return false;
             }
+
+            //HeaderSize = Buffer.WriteHeader(File);
             File.seekp(0, std::ios::beg);
             File.seekg(0, std::ios::beg);
             return true;
@@ -49,8 +48,16 @@ class BufferFile{
             return true;
         }
 
-        int Write(){
-            return 0;
+        int InitRead(){
+            File.seekg(0, std::ios::beg);
+            return File.good();
+        }
+
+        int Read(){
+            if(File.eof()){
+                return true;
+            };
+            return Buffer.Read(File);
         }
 
         int Append(){
@@ -61,6 +68,10 @@ class BufferFile{
 
         int ReadHeader(){
             return 0;
+        }
+
+        ~BufferFile(){
+            Close();
         }
 };
 
@@ -74,14 +85,13 @@ int main(){
         Files.Create(filename);
     };
 
-    std::cout << "Enter Name,surname,address,city,state,zipCode:" <<std::endl;
+    /*std::cout << "Enter Name,surname,address,city,state,zipCode:" <<std::endl;
     std::cin >> person;
 
     std::cout << person;
     if (person.pack(Buffer)){
         Files.Append();
-    }
-            //std::cout << "Outside Buffersize "<< Buffer.GetBufferSize() << std::endl;
+    }*/
     
     /*else{
         std::cout << "failed to pack the person" << std::endl;
@@ -89,15 +99,53 @@ int main(){
 
 	std::ifstream input;
 	input.open("DelimitBuffer.bin");
-	Buffer.Read(input);
+	Buffer.Read(input);*/
 
     Person person2;
+    Files.InitRead(); 
+    while(Files.Read()){
+        person2.unpack(Buffer);
+        std::cout << person2 ;
+    }
+        /*Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+        Files.Read();
+        person2.unpack(Buffer);
+        std::cout << person2 << std::endl;
+    //}
+    //Buffer.PrintBuffer() ;
+    //Buffer.Unpack(person2.FirstName);
+    //Buffer.Unpack(person2.LastName);
     if(person2.unpack(Buffer)){
         std::cout << person;
     } else {
         std::cout << "failed to unpack" << std::endl;
-    };
+    };*/
 
-	input.close();*/
     return 0;
 }
