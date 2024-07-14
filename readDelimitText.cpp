@@ -15,22 +15,6 @@ int main(){
         Files.Create(filename);
     };
 
-    /*std::cout << "Enter Name,surname,address,city,state,zipCode:" <<std::endl;
-    std::cin >> person;
-
-    std::cout << person;
-    if (person.pack(Buffer)){
-        Files.Append();
-    }*/
-    
-    /*else{
-        std::cout << "failed to pack the person" << std::endl;
-    }
-
-	std::ifstream input;
-	input.open("DelimitBuffer.bin");
-	Buffer.Read(input);*/
-
     Person person2;
     Files.InitRead(); 
     while(Files.Read()){
