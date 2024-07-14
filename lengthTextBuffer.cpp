@@ -38,6 +38,7 @@ int LengthTextBuffer::Unpack(char *str){
     if ((startByte+sizeof(size) > BufferSize)){
     return false;
     }
+
     memcpy(str, &Buffer[startByte+sizeof(size)], size);
     str[size] = 0;
     NextBytes += (sizeof(size) + size);
