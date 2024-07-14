@@ -14,7 +14,7 @@ class DelimTextBuffer: public IOBuffer{
         int GetBufferSize();
         int Read(std::istream &input) override;
 
-        int Write(std::ostream &output) const override;
+        int Write(std::ostream &output) override;
 
         int Pack(const char *str) override;
 

@@ -88,7 +88,7 @@ int FixedTextBuffer::Read(std::istream &input){
     return input.good();
 }
 
-int FixedTextBuffer::Write(std::ostream &output) const{
+int FixedTextBuffer::Write(std::ostream &output) {
     output.write(Buffer, BufferSize);
     return output.good();
 }

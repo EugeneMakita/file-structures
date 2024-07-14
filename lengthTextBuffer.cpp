@@ -45,7 +45,7 @@ int LengthTextBuffer::Unpack(char *str){
     return true;
 }
 
-int LengthTextBuffer::Write(std::ostream &output) const{
+int LengthTextBuffer::Write(std::ostream &output) {
     output.write((char *)&BufferSize, sizeof(BufferSize));
     output.write(Buffer, BufferSize);
     return output.good();

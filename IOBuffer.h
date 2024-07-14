@@ -18,7 +18,7 @@ class IOBuffer{
         virtual int ReadHeader();
         virtual int Pack(const char *str);
         virtual int Read(std::istream &input);
-        virtual int Write(std::ostream &output) const;
+        virtual int Write(std::ostream &output);
 };
 
 #endif

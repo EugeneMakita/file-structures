@@ -35,9 +35,10 @@ int  DelimTextBuffer::Read(std::istream &input) {
     return input.good();
 }
 
-int  DelimTextBuffer::Write(std::ostream &output) const{
+int  DelimTextBuffer::Write(std::ostream &output){
     output.write((char*)&BufferSize, sizeof(BufferSize));
     output.write(Buffer, BufferSize);
+    Clear();
     return output.good();
 }
 

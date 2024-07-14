@@ -19,7 +19,7 @@ int IOBuffer::Read(std::istream &input){
     return 0;
 }
 
-int IOBuffer::Write(std::ostream &output) const{
+int IOBuffer::Write(std::ostream &output) {
     return 0;
 }
 
